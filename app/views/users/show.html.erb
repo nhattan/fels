@@ -1,0 +1,18 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+        <% if @user.role == 1 %>
+          <div>Student</div>
+        <% elsif @user.role == 2 %>
+          <div>Teacher</div>
+        <% else %>
+          <div>Admin</div>
+        <% end %>
+      </h1>
+    </section>
+  </aside>
+</div>
