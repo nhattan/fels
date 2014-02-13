@@ -1,6 +1,10 @@
 <% provide(:title, 'Word List') %>
 <h1>Word List</h1>
 
+<% if current_user.teacher? %>
+  <h2><%= link_to "Create new word", new_word_path %></h2>
+<% end %>
+
 <ul class="users">
   <%= render @words %>
 </ul>

@@ -2,8 +2,16 @@ class WordsController < ApplicationController
   before_action :sign_in_user, only: [:index]
   before_action :teacher_user, only: [:new, :edit, :update, :destroy]
 
+  def new
+    @word = Word.new
+  end
+
   def index
     @words = Word.all
+  end
+
+  def show
+    @word = Word.find params[:id]
   end
 
   def create
@@ -12,8 +20,21 @@ class WordsController < ApplicationController
       flash[:success] = "Created successfull"
       redirect_to Category.find word_params[:category_id]
     else
-      flash[:error] = "Please try again"
-      redirect_to Category.find word_params[:category_id]
+      render 'new'
+    end
+  end
+
+  def edit
+    @word = Word.find params[:id]
+  end
+
+  def update
+    @word = Word.find params[:id]
+    if @word.update_attributes word_params
+      flash.now[:success] = "Updated"
+      redirect_to words_url
+    else
+      render 'edit'
     end
   end
 
@@ -34,7 +55,8 @@ class WordsController < ApplicationController
     end
 
     def word_params
-      params.require(:word).permit(:content, :meaning, :category_id)
+      params.require(:word).permit(:content, :meaning, :category_id,
+        answers_attributes: [:content, :correct])
     end
 
     def teacher_user

@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @word do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.text_field :content, placeholder: "Word" %>
+
+      <%= f.text_area :meaning, placeholder: "Meaning" %>
+
+      Category:
+      <%= f.collection_select :category_id, Category.order(:name), 
+        :id, :name %>
+
+      Answers:
+      <div>
+        <%= f.fields_for :answers, [Answer.new]*4 do |builder| %>
+          <%= builder.radio_button :correct, 1 %> correct
+          <%= builder.text_field :content, placeholder: "Answer" %>
+        <% end %>
+      </div>
+      <%= f.submit "Save", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>
