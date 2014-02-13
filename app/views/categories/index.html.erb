@@ -1,0 +1,11 @@
+<% provide(:title, 'Categories') %>
+<h1>Categories</h1>
+
+<% if current_user.role == 2 %>
+  <% @category = Category.new %>
+  <%= render 'shared/category_form' %>
+<% end %>
+
+<ul class="users">
+  <%= render @categories %>
+</ul>

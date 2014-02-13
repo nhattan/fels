@@ -5,4 +5,12 @@
     | <%= link_to "delete", user,  method: :delete,
         data: { confirm: "Are you sure?" } %>
   <% end %>
+
+  <% if user.role == 1 %>
+    <div>Student</div>
+  <% elsif user.role == 2 %>
+    <div>Teacher</div>
+  <% else %>
+    <div>Admin</div>
+  <% end %>
 </li>

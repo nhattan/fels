@@ -1,0 +1,11 @@
+<li>
+  <%= word.content %>: <%= word.meaning %>
+
+  <div>
+    <% if current_user.role == 2 %>
+	    <%= link_to "edit", "" %>
+	    <%= link_to "delete", word,  method: :delete,
+      	data: { confirm: "Are you sure?" } %>
+  	<% end %>
+  </div>
+</li>
