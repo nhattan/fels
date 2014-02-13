@@ -1,0 +1,15 @@
+<li>
+  <%= link_to category.name, category %> 
+  (<%= category.words.count %> words)
+  <div>
+    <%= category.des %>
+  </div>
+
+  <div>
+  	<% if current_user.role == 2 %>
+	    <%= link_to "edit", edit_category_path(category) %>
+	    <%= link_to "delete", category,  method: :delete,
+      	data: { confirm: "Are you sure?" } %>
+  	<% end %>
+  </div>
+</li>
