@@ -21,6 +21,14 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(token.to_s)
   end
 
+  def teacher?
+    self.role == 2
+  end
+
+  def admin?
+    self.role == 3
+  end
+
   private
 
     def create_remember_token

@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140213021346) do
+ActiveRecord::Schema.define(version: 20140213095306) do
+
+  create_table "answers", force: true do |t|
+    t.string   "content"
+    t.integer  "word_id"
+    t.integer  "correct",    default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", force: true do |t|
     t.string   "name"

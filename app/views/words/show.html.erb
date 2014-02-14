@@ -1,0 +1,23 @@
+<% provide(:title, @word.content) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h4>Word: </h4>
+      <%= @word.content %>
+      <h4>Meaning: </h4>
+      <%= @word.meaning %>
+      <h4>Answers: </h4>
+      <% @word.answers.each do |answer| %>
+        <%= answer.content %>
+        <% if answer.correct? %>
+          * correct
+        <% end %>
+      <br>
+      <% end %>
+      <% if current_user.teacher? %>
+        <%= link_to "edit", edit_word_path %>
+        <%= render 'shared/delete_form', object: @word %>
+      <% end %>
+    </section>
+  </aside>
+</div>

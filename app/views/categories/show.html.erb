@@ -1,18 +1,17 @@
 <% provide(:title, @category.name) %>
 
 <div class="row">
-    <section>
-      <h1>
-        <%= @category.name %>
-      </h1>
-      <h2>
-        <%= @category.des %>
-      </h2>
-    </section>
+  <section>
+    <h1>
+      <%= @category.name %>
+    </h1>
+    <h2>
+      <%= @category.des %>
+    </h2>
+  </section>
 </div>
 
-<% if current_user.role == 2 %>
-  <h2>Create new word</h2>
+<% if current_user.teacher? %>
   <%= render 'shared/word_form' %>
 <% end %>
 
