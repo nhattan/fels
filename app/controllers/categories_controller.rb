@@ -2,10 +2,6 @@ class CategoriesController < ApplicationController
   before_action :sign_in_user, only: [:index]
   before_action :teacher_user, only: [:new, :edit, :update, :destroy]
 
-  def new
-    @category = Category.new
-  end
-
   def index
     @categories = Category.all
   end
@@ -14,6 +10,10 @@ class CategoriesController < ApplicationController
     @category = Category.find params[:id]
     @words = @category.words
     @word = Word.new
+  end
+
+  def new
+    @category = Category.new
   end
 
   def create

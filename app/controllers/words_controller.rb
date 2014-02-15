@@ -2,16 +2,21 @@ class WordsController < ApplicationController
   before_action :sign_in_user, only: [:index]
   before_action :teacher_user, only: [:new, :edit, :update, :destroy]
 
-  def new
-    @word = Word.new
-  end
-
   def index
-    @words = Word.all
+    if params[:category_id]
+      @category = Category.find params[:category_id]
+      @words = @category.words
+    else
+      @words = Word.all
+    end
   end
 
   def show
     @word = Word.find params[:id]
+  end
+
+  def new
+    @word = Word.new
   end
 
   def create
