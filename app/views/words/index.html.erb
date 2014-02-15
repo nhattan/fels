@@ -5,6 +5,17 @@
   <h2><%= link_to "Create new word", new_word_path %></h2>
 <% end %>
 
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_tag('', method: :get) do %>
+      <% @options = Category.all.map { |a| [ a.name, a.id ] } %>
+      <%= select_tag "category_id", options_for_select((@options), 
+        params[:category_id]) %> 
+      <%= submit_tag 'Filter', class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
 <ul class="users">
   <%= render @words %>
 </ul>
