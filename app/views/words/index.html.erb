@@ -13,9 +13,9 @@
         params[:category_id]) %> 
       <%= submit_tag 'Filter', class: "btn btn-primary" %>
     <% end %>
+
+    <ul class="users">
+      <%= render @words %>
+    </ul>
   </div>
 </div>
-
-<ul class="users">
-  <%= render @words %>
-</ul>

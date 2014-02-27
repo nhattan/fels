@@ -1,0 +1,31 @@
+<h1><%= link_to @category.name, @category %></h1>
+<h2>Score: <%= @lesson.score %></h2>
+
+<div><%= link_to "All Your Lessons", lessons_path %></div>
+
+<ol class="words">
+  <% @lesson_words.each do |lesson_word| %>
+    <li>
+      <div><%= lesson_word.word.content %></div>
+
+      <div>
+        <% lesson_word.word.answers.each do |answer| %>
+          <div>
+            <% if answer.id == lesson_word.answer_id %>
+              <%= radio_button_tag "", "", true, disabled: true %>
+            <% else %>
+              <%= radio_button_tag "", "", false, disabled: true %>
+            <% end %>
+
+            <%= answer.content %>
+            <% if answer.correct? %>
+              (correct)
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </li>
+  <% end %>
+</ol>
+
+<div><%= link_to "Edit this lesson", edit_lesson_path(@lesson) %></div>

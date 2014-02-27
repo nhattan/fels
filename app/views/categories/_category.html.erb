@@ -11,4 +11,9 @@
       <%= render 'shared/delete_form', object: category %>
     <% end %>
   </div>
+
+  <div>
+    <%= link_to "Start", new_lesson_path(category_id: category.id),
+      class: "btn btn-primary" %>
+  </div>
 </li>

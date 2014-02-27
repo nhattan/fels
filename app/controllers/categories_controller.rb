@@ -49,13 +49,6 @@ class CategoriesController < ApplicationController
 
   private
 
-    def sign_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in"
-      end
-    end
-
     def category_params
       params.require(:category).permit(:name, :des)
     end

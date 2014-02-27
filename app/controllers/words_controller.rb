@@ -1,6 +1,6 @@
 class WordsController < ApplicationController
   before_action :sign_in_user, only: [:index]
-  before_action :teacher_user, only: [:new, :edit, :update, :destroy]
+  before_action :teacher_user, only: [:show, :new, :edit, :update, :destroy]
 
   def index
     if params[:category_id]
@@ -17,6 +17,7 @@ class WordsController < ApplicationController
 
   def new
     @word = Word.new
+    @categories = Category.order(:name)
   end
 
   def create
@@ -25,7 +26,8 @@ class WordsController < ApplicationController
       flash[:success] = "Created successfull"
       redirect_to Category.find word_params[:category_id]
     else
-      render 'new'
+      flash[:error] = "Please fill all the field"
+      redirect_to Category.find word_params[:category_id]
     end
   end
 
@@ -37,7 +39,7 @@ class WordsController < ApplicationController
     @word = Word.find params[:id]
     if @word.update_attributes word_params
       flash.now[:success] = "Updated"
-      redirect_to words_url
+      redirect_to @word
     else
       render 'edit'
     end
@@ -45,23 +47,17 @@ class WordsController < ApplicationController
 
   def destroy
     @word = Word.find params[:id]
+    @category = @word.category
     @word.destroy
     flash[:success] = "Word deleted"
-    redirect_to words_url
+    redirect_to @category
   end
 
   private
 
-    def sign_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in"
-      end
-    end
-
     def word_params
-      params.require(:word).permit(:content, :meaning, :category_id,
-        answers_attributes: [:content, :correct])
+      params.require(:word).permit(:id, :content, :meaning, :category_id,
+        answers_attributes: [:id, :content, :correct])
     end
 
     def teacher_user

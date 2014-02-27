@@ -1,11 +1,11 @@
 <li>
-  <%= link_to word.content, word %>: <%= word.meaning %>
-  <div>in <%= link_to word.category.name, word.category %></div>
-
   <div>
     <% if current_user.teacher? %>
+    	<%= link_to word.content, word %>: <%= word.meaning %>
       <%= link_to "edit", edit_word_path(word) %>
       <%= render 'shared/delete_form', object: word %>
+    <% else %>
+     	<%= word.content %>: <%= word.meaning %>
     <% end %>
   </div>
 </li>

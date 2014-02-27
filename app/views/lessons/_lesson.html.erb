@@ -1,0 +1,11 @@
+<li>
+  <div>
+    <%= link_to lesson.category.name, lesson %>
+    (<%= lesson.score %>/<%= lesson.lesson_words.count %>)
+  </div>
+  <div>
+    <%= link_to "edit", edit_lesson_path(lesson) %>
+    |
+    <%= render 'shared/delete_form', object: lesson %>
+  </div>
+</li>

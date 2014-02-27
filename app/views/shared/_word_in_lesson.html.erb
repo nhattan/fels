@@ -1,0 +1,12 @@
+<li class="lesson" id="lesson_<%= index %>" data-index="<%= index %>">
+  <div><%= word.content %></div>
+  <% word.answers.each do |answer| %>
+    <div class="words">
+      <%= builder.radio_button :answer_id, answer.id %>
+      <%= answer.content %>
+    </div>
+  <% end %>
+  <br>
+  <%= button_tag "Next", class: "btn btn-primary next-lesson", 
+    type: "button" %>
+</li>

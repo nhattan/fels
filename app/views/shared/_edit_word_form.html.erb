@@ -13,7 +13,7 @@
 
       Answers:
       <div>
-        <%= f.fields_for :answers, [Answer.new]*4 do |builder| %>
+        <%= f.fields_for :answers do |builder| %>
           <%= builder.radio_button :correct, 1 %> correct
           <%= builder.text_field :content, placeholder: "Answer" %>
         <% end %>

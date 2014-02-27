@@ -1,0 +1,42 @@
+<h1><%= link_to @category.name, @category %></h1>
+<h2><%= @category.des %></h2>
+
+<ol class="lessons">
+  <%= form_for @lesson do |f| %>
+    <%= f.hidden_field :category_id, value: @category.id %>
+    <% index = 0 %>
+    <%= f.fields_for :lesson_words do |builder| %>
+      <% word = builder.object.word %>
+      <%= builder.hidden_field :word_id, value: word.id %>
+      <%= render 'shared/word_in_lesson', word: word, 
+        builder: builder, index: index %>
+      <% index += 1 %>
+    <% end %>
+    <%= f.submit "Submit", class: "btn btn-large btn-primary submit-lessons" %>
+  <% end %>
+</ol>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.submit-lessons').hide();
+    $('li[id^="lesson"]').each(function() {
+      var index = $(this).data('index');
+      $(this).find('.next-lesson').click(function() {
+        on_next_lesson(index);
+      });
+      $(this).hide();
+    });
+    $('#lesson_0').show();
+  });
+
+  function on_next_lesson(index) {
+    $('#lesson_' + index).hide();
+    if ($('#lesson_' + (index + 1)).length > 0) 
+      $('#lesson_' + (index + 1)).show();
+
+    if ($('#lesson_' + (index + 2)).length == 0) {
+      $('#lesson_' + (index + 1)).find('.next-lesson').hide();
+      $('.submit-lessons').show();
+    }
+  }
+</script>

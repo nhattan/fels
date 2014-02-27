@@ -1,0 +1,23 @@
+<h1><%= link_to @category.name, @category %></h1>
+<h2><%= @category.des %></h2>
+
+<ol class="words">
+  <%= form_for @lesson do |f| %>
+    <%= f.hidden_field :category_id, value: @category.id %>
+    <%= f.fields_for :lesson_words do |builder| %>
+      <% word = builder.object.word %>
+      <%= builder.hidden_field :word_id, value: word.id %>
+      <li>
+        <div><%= word.content %></div>
+        <% word.answers.each do |answer| %>
+          <div>
+            <%= builder.radio_button :answer_id, answer.id %>
+            <%= answer.content %>
+          </div>
+        <% end %>
+      </li>
+    <% end %>
+    <br>
+    <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+  <% end %>
+</ol>
